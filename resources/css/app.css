@@ -1,27 +1,100 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-@theme {
-
-    /* Border Radius */
-    --radius-sm: 5px;
-    --radius-md: 5px;
-    --radius-lg: 5px;
-    --radius-xl: 5px;
-    --radius-2xl: 5px;
-    --radius-full: 9999px;
-
-
-    /* Spacing Scale */
-    --spacing-1: 4px;
-    --spacing-2: 8px;
-    --spacing-3: 12px;
-    --spacing-4: 16px;
-    --spacing-6: 24px;
-    --spacing-8: 32px;
-    --spacing-12: 48px;
-    --spacing-16: 64px;
-}
-
-
+/* Configure sources and dark variant */
 @source "../../resources/views";
 @source "../../resources/js";
+
+@variant dark (&:where(.dark, .dark *));
+
+/* Map Design Tokens directly to Tailwind v4 Theme Variables */
+@theme {
+    /* Typography */
+    --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+    /* Brand & UI Colors */
+    --color-primary: #F1641E;
+    --color-primary-hover: #D85413;
+    --color-primary-active: #B9470F;
+
+    --color-surface: #F9F8F6;
+    --color-elevated: #FFFFFF;
+    --color-text: #1E293B;
+    --color-muted: #64748B;
+    --color-border: #E7E5E4;
+
+    /* Feedback Colors */
+    --color-success: #16A34A;
+    --color-warning: #D97706;
+    --color-danger: #DC2626;
+
+    /* Border Radii (Overriding to your requested scale) */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 10px;
+    --radius-2xl: 14px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04);
+    --shadow-dropdown: 0 8px 24px rgb(0 0 0 / 0.08);
+    --shadow-modal: 0 20px 50px rgb(0 0 0 / 0.12);
+
+    /* Custom Transitions */
+    --transition-duration-fast: 150ms;
+    --transition-duration-slow: 200ms;
+}
+
+/* Light Mode Defaults */
+:root {
+    --color-surface: #F9F8F6;
+    --color-elevated: #FFFFFF;
+    --color-text: #1E293B;
+    --color-muted: #64748B;
+    --color-border: #E7E5E4;
+}
+
+/* Dark Mode Overrides */
+.dark {
+    --color-surface: #121212;
+    --color-elevated: #1A1A1A;
+    --color-text: #F1F5F9;
+    --color-muted: #94A3B8;
+    --color-border: #292929;
+}
+
+/* Base Body Styles */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Global Transitions for UI changes */
+body,
+body * {
+    transition-property: color, background-color, border-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Accessible Focus Styles */
+:focus-visible {
+    outline: 1px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Link Base Rules */
+a {
+    color: inherit;
+}
+
+a.brand-link {
+    color: var(--color-primary);
+}
+
+a.brand-link:hover {
+    color: var(--color-primary-hover);
+}

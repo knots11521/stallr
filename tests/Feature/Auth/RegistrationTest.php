@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\User;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
 use Tests\TestCase;
@@ -9,6 +11,13 @@ use Tests\TestCase;
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(RoleSeeder::class);
+    }
 
     public function test_registration_screen_can_be_rendered(): void
     {
@@ -31,6 +40,10 @@ class RegistrationTest extends TestCase
 
         $component->assertRedirect(route('dashboard', absolute: false));
 
+        $user = User::where('email', 'test@example.com')->firstOrFail();
+
         $this->assertAuthenticated();
+        $this->assertAuthenticatedAs($user);
+        $this->assertTrue($user->hasRole('Customer'));
     }
 }
