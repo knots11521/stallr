@@ -1,4 +1,19 @@
+@import "tailwindcss";
+
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/Admin/**/*';
+@source '../../../../resources/views/filament/admin/**/*';
+@source '../../../../resources/views/livewire/**/*';
+
+@theme {
+    --radius-sm: 5px;
+    --radius-md: 5px;
+    --radius-lg: 5px;
+    --radius-xl: 5px;
+    --radius-2xl: 5px;
+    --radius-full: 9999px;
+}
 
 :root {
     --radius-sm: 5px;

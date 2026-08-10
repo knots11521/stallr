@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Product;
 use App\Models\VendorApplication;
+use App\Policies\ProductPolicy;
 use App\Policies\VendorApplicationPolicy;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,10 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        Gate::policy(
-            VendorApplication::class,
-            VendorApplicationPolicy::class
-        );
+        //
     }
 
     /**
@@ -25,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::policy(
+            VendorApplication::class,
+            VendorApplicationPolicy::class
+        );
+
+        Gate::policy(
+            Product::class,
+            ProductPolicy::class
+        );
     }
 }
