@@ -14,6 +14,7 @@ use App\Models\Category;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes
@@ -29,19 +30,6 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Product Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/products', ProductList::class)
-    ->name('products.index');
-
-Route::get('/products/{product:slug}', ProductShow::class)
-    ->name('products.show');
-
-
-/*
-|--------------------------------------------------------------------------
 | Authenticated Routes
 |--------------------------------------------------------------------------
 */
@@ -50,19 +38,61 @@ Route::middleware('auth')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication & Profile
+    | Authentication
     |--------------------------------------------------------------------------
     */
 
     Route::post('/logout', Logout::class)
         ->name('logout');
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Customer & Vendor Dashboard
+    |--------------------------------------------------------------------------
+    |
+    | Customers and approved Vendors can access the regular dashboard.
+    | Admins use the separate Filament Admin panel at /admin.
+    |
+    */
+
     Route::view('/dashboard', 'dashboard')
-        ->middleware('verified')
+        ->middleware(['verified', 'role:Customer|Vendor'])
         ->name('dashboard');
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile
+    |--------------------------------------------------------------------------
+    |
+    | Available to authenticated Customer and Vendor accounts.
+    |
+    */
+
     Route::view('/profile', 'profile')
+        ->middleware('role:Customer|Vendor')
         ->name('profile');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Customer & Vendor Marketplace
+    |--------------------------------------------------------------------------
+    |
+    | Customers and Vendors can browse products.
+    | Admins use the separate Filament Admin panel.
+    |
+    */
+
+    Route::middleware('role:Customer|Vendor')->group(function () {
+
+        Route::get('/products', ProductList::class)
+            ->name('products.index');
+
+        Route::get('/products/{product:slug}', ProductShow::class)
+            ->name('products.show');
+    });
 
 
     /*
@@ -70,14 +100,28 @@ Route::middleware('auth')->group(function () {
     | Customer Marketplace
     |--------------------------------------------------------------------------
     |
-    | Customers can shop, maintain their cart, checkout, and view orders.
+    | Only Customers can shop, maintain their cart, checkout,
+    | view orders, and submit a Vendor application.
     |
     */
 
     Route::middleware('role:Customer')->group(function () {
 
+        /*
+        |--------------------------------------------------------------------------
+        | Cart
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/cart', CartPage::class)
             ->name('cart');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Checkout
+        |--------------------------------------------------------------------------
+        */
 
         Route::get('/checkout', CheckoutPage::class)
             ->name('checkout');
@@ -108,6 +152,9 @@ Route::middleware('auth')->group(function () {
         |--------------------------------------------------------------------------
         | Vendor Application
         |--------------------------------------------------------------------------
+        |
+        | A Customer can apply to become a Vendor.
+        |
         */
 
         Route::get('/vendor/apply', ApplicationPage::class)
