@@ -11,15 +11,14 @@
         <!-- Outer pulsing aura -->
         <div class="absolute h-16 w-16 animate-ping rounded-full bg-primary/20"></div>
 
-        <!-- Center Icon Box -->
+        {{-- <!-- Center Icon Box -->
         <div
             class="relative flex h-14 w-14 animate-bounce items-center justify-center rounded-full bg-primary text-white shadow-modal">
-            <x-application-logo class="h-7 w-7 fill-current text-white" />
+            <x-application-logo class="h-full w-full scale-150 fill-current text-white" />
+        </div> --}}
+
+        <div class="animate-ping items-center justify-center">
+            <x-application-logo class="h-full w-full scale-100 fill-current text-white" />
         </div>
     </div>
-
-    <!-- Subtitle text using design system muted token -->
-    <span class="mt-4 text-xs font-semibold tracking-wider text-muted uppercase">
-        StallR
-    </span>
 </div>

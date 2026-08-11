@@ -23,7 +23,7 @@ new class extends Component {
             <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center gap-3 overflow-hidden">
                 <div
                     class="w-9 h-9 rounded-[10px] bg-[#F1641E] flex-shrink-0 flex items-center justify-center text-white shadow-md shadow-[#F1641E]/25">
-                    <x-application-logo class="w-5 h-5 fill-current" />
+                    <x-application-logo class="w-full h-full scale-150 fill-current" />
                 </div>
                 <span x-show="!sidebarCollapsed" x-transition.opacity
                     class="font-bold text-base tracking-tight text-stone-900 dark:text-white whitespace-nowrap">
@@ -194,7 +194,7 @@ new class extends Component {
                         <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center gap-2.5">
                             <div
                                 class="w-8 h-8 rounded-[10px] bg-[#F1641E] flex items-center justify-center text-white">
-                                <x-application-logo class="w-4 h-4 fill-current" />
+                                <x-application-logo class="w-full h-full scale-150 fill-current" />
                             </div>
                             <span
                                 class="font-bold text-stone-900 dark:text-white">{{ config('app.name', 'App') }}</span>

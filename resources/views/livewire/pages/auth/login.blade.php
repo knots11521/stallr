@@ -29,7 +29,7 @@ new #[Layout('layouts.guest')] class extends Component {
     <div class="text-center mb-6">
         <a href="/" wire:navigate
             class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#F1641E] text-white shadow-lg shadow-[#F1641E]/25 mb-4">
-            <x-application-logo class="w-6 h-6 fill-current" />
+            <x-application-logo class="h-full w-full scale-180 fill-current text-white" />
         </a>
         <h2 class="text-xl font-bold text-stone-900 dark:text-white tracking-tight">
             {{ __('Welcome back') }}

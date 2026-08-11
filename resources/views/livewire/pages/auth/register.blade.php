@@ -42,7 +42,7 @@ new #[Layout('layouts.guest')] class extends Component {
     <div class="text-center mb-6">
         <a href="/" wire:navigate
             class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary text-white shadow-lg mb-4">
-            <x-application-logo class="w-6 h-6 fill-current" />
+            <x-application-logo class="w-full h-full scale-150 fill-current" />
         </a>
         <h2 class="text-xl font-bold text-main tracking-tight">
             {{ __('Create an account') }}

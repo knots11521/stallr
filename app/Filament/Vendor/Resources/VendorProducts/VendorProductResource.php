@@ -79,7 +79,9 @@ class VendorProductResource extends Resource
                     ->directory('products')
                     ->visibility('public')
                     ->reorderable()
+                    ->deletable()
                     ->dehydrated(true),
+
 
             ]);
     }
