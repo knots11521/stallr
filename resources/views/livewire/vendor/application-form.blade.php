@@ -44,8 +44,6 @@
                     rounded-[5px]
                     border-gray-300
                     shadow-sm
-                    focus:border-indigo-500
-                    focus:ring-indigo-500
                 "></textarea>
 
 

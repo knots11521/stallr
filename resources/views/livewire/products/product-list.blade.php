@@ -41,9 +41,7 @@
                        bg-stone-50 dark:bg-stone-900
                        text-stone-900 dark:text-white
                        placeholder-stone-400
-                       px-3 py-2.5 text-sm
-                       focus:border-[#F1641E]
-                       focus:ring-[#F1641E]">
+                       px-3 py-2.5 text-sm ">
             </div>
 
 
@@ -57,8 +55,7 @@
                        bg-stone-50 dark:bg-stone-900
                        text-stone-900 dark:text-white
                        px-3 py-2.5 text-sm
-                       focus:border-[#F1641E]
-                       focus:ring-[#F1641E]">
+                     ">
                     <option value="">All Categories</option>
 
                     @foreach ($categories as $category)
@@ -80,9 +77,7 @@
                        bg-stone-50 dark:bg-stone-900
                        text-stone-900 dark:text-white
                        placeholder-stone-400
-                       px-3 py-2.5 text-sm
-                       focus:border-[#F1641E]
-                       focus:ring-[#F1641E]">
+                       px-3 py-2.5 text-sm ">
             </div>
 
 
@@ -97,8 +92,7 @@
                        text-stone-900 dark:text-white
                        placeholder-stone-400
                        px-3 py-2.5 text-sm
-                       focus:border-[#F1641E]
-                       focus:ring-[#F1641E]">
+                       ">
             </div>
         </div>
 
@@ -115,8 +109,7 @@
                    bg-stone-50 dark:bg-stone-900
                    text-stone-900 dark:text-white
                    px-3 py-2.5 text-sm
-                   focus:border-[#F1641E]
-                   focus:ring-[#F1641E]">
+                   ">
                 <option value="latest">Newest</option>
                 <option value="price_low">Lowest Price</option>
                 <option value="price_high">Highest Price</option>
