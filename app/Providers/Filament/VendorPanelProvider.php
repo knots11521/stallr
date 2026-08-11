@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Models\User;
+use App\Filament\Vendor\Widgets\VendorStats;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -12,16 +12,14 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
+use Filament\Navigation\NavigationItem;
+
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Vendor\Widgets\VendorStats;
-use Filament\View\PanelsRenderHook;
 
 class VendorPanelProvider extends PanelProvider
 {
@@ -30,33 +28,88 @@ class VendorPanelProvider extends PanelProvider
         return $panel
             ->id('vendor')
             ->path('vendor')
+
+            /*
+            |--------------------------------------------------------------------------
+            | Sidebar
+            |--------------------------------------------------------------------------
+            */
+
             ->sidebarCollapsibleOnDesktop()
+
+            /*
+            |--------------------------------------------------------------------------
+            | Colors
+            |--------------------------------------------------------------------------
+            */
+
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->renderHook(
-                PanelsRenderHook::USER_MENU_BEFORE,
-                fn(): string => view('filament.vendor.back-to-store')->render(),
-            )
+
+            /*
+            |--------------------------------------------------------------------------
+            | Back to Store
+            |--------------------------------------------------------------------------
+            |
+            | Placed at the bottom of the sidebar.
+            |
+            */
+
+            ->navigationItems([
+                NavigationItem::make('Back to Store')
+                    ->url(fn () => route('dashboard'))
+                    ->icon('heroicon-o-arrow-left')
+                    ->sort(999),
+            ])
+
+            /*
+            |--------------------------------------------------------------------------
+            | Resources
+            |--------------------------------------------------------------------------
+            */
+
             ->discoverResources(
                 in: app_path('Filament/Vendor/Resources'),
-                for: 'App\\Filament\\Vendor\\Resources'
+                for: 'App\\Filament\\Vendor\\Resources',
             )
+
+            /*
+            |--------------------------------------------------------------------------
+            | Pages
+            |--------------------------------------------------------------------------
+            */
+
             ->discoverPages(
                 in: app_path('Filament/Vendor/Pages'),
-                for: 'App\\Filament\\Vendor\\Pages'
+                for: 'App\\Filament\\Vendor\\Pages',
             )
+
             ->pages([
                 Dashboard::class,
             ])
+
+            /*
+            |--------------------------------------------------------------------------
+            | Widgets
+            |--------------------------------------------------------------------------
+            */
+
             ->discoverWidgets(
                 in: app_path('Filament/Vendor/Widgets'),
-                for: 'App\\Filament\\Vendor\\Widgets'
+                for: 'App\\Filament\\Vendor\\Widgets',
             )
+
             ->widgets([
-                AccountWidget::class,
                 VendorStats::class,
             ])
+
+            /*
+            |--------------------------------------------------------------------------
+            | Middleware
+            |--------------------------------------------------------------------------
+            */
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -68,6 +121,13 @@ class VendorPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+
+            /*
+            |--------------------------------------------------------------------------
+            | Authentication
+            |--------------------------------------------------------------------------
+            */
+
             ->authMiddleware([
                 Authenticate::class,
             ]);
