@@ -3,8 +3,8 @@
 @php
     $classes =
         $active ?? false
-            ? 'block w-full ps-3 pe-4 py-2 text-start text-base font-medium text-[#F1641E] dark:text-[#FF7A3D] bg-orange-50 dark:bg-orange-950/30 focus:outline-none focus:text-[#D95616] dark:focus:text-[#FF8A52] focus:bg-orange-100 dark:focus:bg-orange-900/40 transition duration-150 ease-in-out'
-            : 'block w-full ps-3 pe-4 py-2 text-start text-base font-medium text-stone-600 dark:text-stone-400 hover:text-[#F1641E] dark:hover:text-[#FF7A3D] hover:bg-orange-50 dark:hover:bg-stone-800/60 focus:outline-none focus:text-[#F1641E] dark:focus:text-[#FF7A3D] focus:bg-orange-50 dark:focus:bg-stone-800/60 transition duration-150 ease-in-out';
+            ? 'block w-full ps-3 pe-4 py-2 border-l-4 border-teal-600 dark:border-teal-400 text-start text-base font-medium text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/50 focus:outline-none focus:text-teal-800 dark:focus:text-teal-200 focus:bg-teal-100 dark:focus:bg-teal-900/60 focus:border-teal-700 dark:focus:border-teal-300 transition duration-150 ease-in-out'
+            : 'block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-stone-600 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-800/60 hover:border-stone-300 dark:hover:border-stone-600 focus:outline-none focus:text-stone-800 dark:focus:text-stone-100 focus:bg-stone-50 dark:focus:bg-stone-800/60 focus:border-stone-300 dark:focus:border-stone-600 transition duration-150 ease-in-out';
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
