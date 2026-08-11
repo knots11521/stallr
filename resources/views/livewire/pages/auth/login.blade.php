@@ -56,7 +56,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     </svg>
                 </div>
                 <x-text-input wire:model="form.email" id="email"
-                    class="block w-full pl-9 pr-3 py-2.5 text-sm rounded-[10px] bg-stone-50 dark:bg-stone-900/50 border-stone-200 dark:border-stone-800 focus:border-[#F1641E] focus:ring-[#F1641E]/20 dark:text-stone-100 placeholder-stone-400 transition duration-150"
+                    class="block w-full pl-9 pr-3 py-2.5 text-sm rounded-[10px] bg-stone-50 dark:bg-stone-900/50 border-stone-200 dark:border-stone-800 dark:text-stone-100 placeholder-stone-400 transition duration-150"
                     type="email" name="email" required autofocus autocomplete="username"
                     placeholder="name@example.com" />
             </div>
@@ -77,7 +77,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 </div>
 
                 <x-text-input wire:model="form.password" id="password" ::type="showPassword ? 'text' : 'password'"
-                    class="block w-full pl-9 pr-10 py-2.5 text-sm rounded-[10px] bg-stone-50 dark:bg-stone-900/50 border-stone-200 dark:border-stone-800 focus:border-[#F1641E] focus:ring-[#F1641E]/20 dark:text-stone-100 placeholder-stone-400 transition duration-150"
+                    class="block w-full pl-9 pr-10 py-2.5 text-sm rounded-[10px] bg-stone-50 dark:bg-stone-900/50 border-stone-200 dark:border-stone-800 dark:text-stone-100 placeholder-stone-400 transition duration-150"
                     name="password" required autocomplete="current-password" placeholder="••••••••" />
 
                 <!-- Password Visibility Toggle Button -->

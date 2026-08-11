@@ -11,6 +11,7 @@ use App\Livewire\Products\ProductList;
 use App\Livewire\Products\ProductShow;
 use App\Livewire\Vendor\ApplicationPage;
 use App\Models\Category;
+use App\Http\Middleware\PreventAdminFromStore;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,26 @@ Route::get('/', function () {
         'categories' => Category::orderBy('name')->get(),
     ]);
 })->name('home');
+
+
+/*
+|--------------------------------------------------------------------------
+| Public Marketplace
+|--------------------------------------------------------------------------
+|
+| Guests, Customers, and Vendors can browse the marketplace.
+| Admins are blocked from the customer-facing store.
+|
+*/
+
+Route::middleware(PreventAdminFromStore::class)->group(function () {
+
+    Route::get('/products', ProductList::class)
+        ->name('products.index');
+
+    Route::get('/products/{product:slug}', ProductShow::class)
+        ->name('products.show');
+});
 
 
 /*
@@ -52,7 +73,7 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     |
     | Customers and Vendors can access the regular dashboard.
-    | Admins use the separate Filament Admin panel at /admin.
+    | Admins use the separate Filament Admin panel.
     |
     */
 
@@ -77,28 +98,17 @@ Route::middleware('auth')->group(function () {
     | Customer & Vendor Marketplace
     |--------------------------------------------------------------------------
     |
-    | Both Customers and Vendors can browse products.
-    | Admins use the separate Filament Admin panel.
+    | Vendors are also marketplace customers, so both Customers
+    | and Vendors can use cart, checkout, and orders.
     |
     */
 
     Route::middleware('role:Customer|Vendor')->group(function () {
 
-        Route::get('/products', ProductList::class)
-            ->name('products.index');
-
-        Route::get('/products/{product:slug}', ProductShow::class)
-            ->name('products.show');
-
-
         /*
         |--------------------------------------------------------------------------
         | Cart
         |--------------------------------------------------------------------------
-        |
-        | Vendors remain Customers in terms of marketplace functionality,
-        | so Vendors can continue to use their cart.
-        |
         */
 
         Route::get('/cart', CartPage::class)
@@ -143,7 +153,7 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     |
     | Only Customers can submit a Vendor application.
-    | An existing Vendor should not submit another application.
+    | Vendors cannot submit another application.
     |
     */
 
