@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     | Customer & Vendor Dashboard
     |--------------------------------------------------------------------------
     |
-    | Customers and approved Vendors can access the regular dashboard.
+    | Customers and Vendors can access the regular dashboard.
     | Admins use the separate Filament Admin panel at /admin.
     |
     */
@@ -63,11 +63,8 @@ Route::middleware('auth')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Profile
+    | Customer & Vendor Profile
     |--------------------------------------------------------------------------
-    |
-    | Available to authenticated Customer and Vendor accounts.
-    |
     */
 
     Route::view('/profile', 'profile')
@@ -80,7 +77,7 @@ Route::middleware('auth')->group(function () {
     | Customer & Vendor Marketplace
     |--------------------------------------------------------------------------
     |
-    | Customers and Vendors can browse products.
+    | Both Customers and Vendors can browse products.
     | Admins use the separate Filament Admin panel.
     |
     */
@@ -92,25 +89,16 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/products/{product:slug}', ProductShow::class)
             ->name('products.show');
-    });
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Customer Marketplace
-    |--------------------------------------------------------------------------
-    |
-    | Only Customers can shop, maintain their cart, checkout,
-    | view orders, and submit a Vendor application.
-    |
-    */
-
-    Route::middleware('role:Customer')->group(function () {
 
         /*
         |--------------------------------------------------------------------------
         | Cart
         |--------------------------------------------------------------------------
+        |
+        | Vendors remain Customers in terms of marketplace functionality,
+        | so Vendors can continue to use their cart.
+        |
         */
 
         Route::get('/cart', CartPage::class)
@@ -146,16 +134,20 @@ Route::middleware('auth')->group(function () {
                 Route::get('/{order}', OrderConfirmation::class)
                     ->name('show');
             });
+    });
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Vendor Application
-        |--------------------------------------------------------------------------
-        |
-        | A Customer can apply to become a Vendor.
-        |
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Vendor Application
+    |--------------------------------------------------------------------------
+    |
+    | Only Customers can submit a Vendor application.
+    | An existing Vendor should not submit another application.
+    |
+    */
+
+    Route::middleware('role:Customer')->group(function () {
 
         Route::get('/vendor/apply', ApplicationPage::class)
             ->name('vendor.apply');
