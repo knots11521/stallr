@@ -1,8 +1,15 @@
 <div>
+
+    {{-- ========================================================= --}}
+    {{-- PAGE HEADER                                                --}}
+    {{-- ========================================================= --}}
+
     <div>
         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight
-               text-stone-900 dark:text-white">
+                   text-stone-900 dark:text-white">
+
             Checkout
+
         </h1>
 
         <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">
@@ -16,14 +23,14 @@
     {{-- ========================================================= --}}
 
     @if ($errors->has('cart'))
-        <div class="rounded-[10px]
-               border border-red-200
-               bg-red-50
-               px-4 py-3
-               text-sm text-red-700
-               dark:border-red-900/50
-               dark:bg-red-950/30
-               dark:text-red-400"
+        <div class="mt-6 rounded-[10px]
+                   border border-red-200
+                   bg-red-50
+                   px-4 py-3
+                   text-sm text-red-700
+                   dark:border-red-900/50
+                   dark:bg-red-950/30
+                   dark:text-red-400"
             role="alert">
 
             {{ $errors->first('cart') }}
@@ -37,14 +44,14 @@
     {{-- ========================================================= --}}
 
     @if ($errors->has('payment'))
-        <div class="rounded-[10px]
-               border border-red-200
-               bg-red-50
-               px-4 py-3
-               text-sm text-red-700
-               dark:border-red-900/50
-               dark:bg-red-950/30
-               dark:text-red-400"
+        <div class="mt-6 rounded-[10px]
+                   border border-red-200
+                   bg-red-50
+                   px-4 py-3
+                   text-sm text-red-700
+                   dark:border-red-900/50
+                   dark:bg-red-950/30
+                   dark:text-red-400"
             role="alert">
 
             {{ $errors->first('payment') }}
@@ -53,7 +60,11 @@
     @endif
 
 
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+    {{-- ========================================================= --}}
+    {{-- CHECKOUT GRID                                              --}}
+    {{-- ========================================================= --}}
+
+    <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
 
 
         {{-- ===================================================== --}}
@@ -69,31 +80,37 @@
 
             <section
                 class="rounded-[10px]
-                   border border-stone-200/80
-                   bg-white
-                   p-5
-                   dark:border-stone-800/80
-                   dark:bg-[#1A1A1A]">
+                       border border-stone-200/80
+                       bg-white
+                       p-5
+                       dark:border-stone-800/80
+                       dark:bg-[#1A1A1A]">
 
                 <div class="mb-5">
 
                     <h2
                         class="text-lg font-bold
-                           text-stone-900
-                           dark:text-white">
+                               text-stone-900
+                               dark:text-white">
 
                         Customer Information
 
                     </h2>
 
-                    <p class="mt-1 text-xs text-stone-500 dark:text-stone-400">
+                    <p
+                        class="mt-1 text-xs
+                               text-stone-500
+                               dark:text-stone-400">
+
                         Your account information
+
                     </p>
 
                 </div>
 
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
 
                     {{-- Name --}}
                     <div>
@@ -104,8 +121,8 @@
 
                         <p
                             class="mt-1 text-sm font-semibold
-                               text-stone-900
-                               dark:text-white">
+                                   text-stone-900
+                                   dark:text-white">
 
                             {{ $user->name }}
 
@@ -123,8 +140,8 @@
 
                         <p
                             class="mt-1 break-all text-sm font-semibold
-                               text-stone-900
-                               dark:text-white">
+                                   text-stone-900
+                                   dark:text-white">
 
                             {{ $user->email }}
 
@@ -142,8 +159,8 @@
 
                         <p
                             class="mt-1 text-sm font-semibold
-                               text-stone-900
-                               dark:text-white">
+                                   text-stone-900
+                                   dark:text-white">
 
                             {{ $user->phone ?: 'No phone number provided' }}
 
@@ -162,25 +179,30 @@
 
             <section
                 class="rounded-[10px]
-                   border border-stone-200/80
-                   bg-white
-                   p-5
-                   dark:border-stone-800/80
-                   dark:bg-[#1A1A1A]">
+                       border border-stone-200/80
+                       bg-white
+                       p-5
+                       dark:border-stone-800/80
+                       dark:bg-[#1A1A1A]">
 
                 <div>
 
                     <h2
                         class="text-lg font-bold
-                           text-stone-900
-                           dark:text-white">
+                               text-stone-900
+                               dark:text-white">
 
                         Shipping Address
 
                     </h2>
 
-                    <p class="mt-1 text-xs text-stone-500 dark:text-stone-400">
+                    <p
+                        class="mt-1 text-xs
+                               text-stone-500
+                               dark:text-stone-400">
+
                         Your main address
+
                     </p>
 
                 </div>
@@ -189,19 +211,20 @@
                 {{-- Main Address --}}
                 <div
                     class="mt-5 rounded-[8px]
-                       border border-stone-200
-                       bg-stone-50
-                       p-4
-                       dark:border-stone-800
-                       dark:bg-stone-900/50">
+                           border border-stone-200
+                           bg-stone-50
+                           p-4
+                           dark:border-stone-800
+                           dark:bg-stone-900/50">
 
                     <div class="space-y-2">
+
 
                         {{-- Customer Name --}}
                         <p
                             class="text-sm font-semibold
-                               text-stone-900
-                               dark:text-white">
+                                   text-stone-900
+                                   dark:text-white">
 
                             {{ $user->name }}
 
@@ -210,7 +233,10 @@
 
                         {{-- Phone --}}
                         @if ($user->phone)
-                            <p class="text-sm text-stone-600 dark:text-stone-400">
+                            <p
+                                class="text-sm
+                                       text-stone-600
+                                       dark:text-stone-400">
 
                                 {{ $user->phone }}
 
@@ -221,10 +247,9 @@
                         {{-- Address --}}
                         @if ($user->address)
                             <div
-                                class="pt-2
-                                   text-sm leading-6
-                                   text-stone-600
-                                   dark:text-stone-400">
+                                class="pt-2 text-sm leading-6
+                                       text-stone-600
+                                       dark:text-stone-400">
 
                                 {!! nl2br(e($user->address)) !!}
 
@@ -232,8 +257,8 @@
                         @else
                             <p
                                 class="pt-2 text-sm
-                                   text-stone-500
-                                   dark:text-stone-400">
+                                       text-stone-500
+                                       dark:text-stone-400">
 
                                 No shipping address provided.
 
@@ -249,16 +274,16 @@
                 @if (!$user->address)
                     <div
                         class="mt-3 rounded-[8px]
-                           border border-amber-200
-                           bg-amber-50
-                           px-3 py-2.5
-                           dark:border-amber-900/50
-                           dark:bg-amber-950/20">
+                               border border-amber-200
+                               bg-amber-50
+                               px-3 py-2.5
+                               dark:border-amber-900/50
+                               dark:bg-amber-950/20">
 
                         <p
                             class="text-xs leading-5
-                               text-amber-700
-                               dark:text-amber-400">
+                                   text-amber-700
+                                   dark:text-amber-400">
 
                             Please add your main address to your account
                             before placing an order.
@@ -277,22 +302,23 @@
 
             <section
                 class="rounded-[10px]
-                   border border-stone-200/80
-                   bg-white
-                   p-5
-                   dark:border-stone-800/80
-                   dark:bg-[#1A1A1A]">
+                       border border-stone-200/80
+                       bg-white
+                       p-5
+                       dark:border-stone-800/80
+                       dark:bg-[#1A1A1A]">
 
                 <div class="mb-5">
 
-                    <div class="flex items-center justify-between gap-4">
+                    <div class="flex items-center
+                               justify-between gap-4">
 
                         <div>
 
                             <h2
                                 class="text-lg font-bold
-                                   text-stone-900
-                                   dark:text-white">
+                                       text-stone-900
+                                       dark:text-white">
 
                                 Order Items
 
@@ -300,8 +326,8 @@
 
                             <p
                                 class="mt-1 text-xs
-                                   text-stone-500
-                                   dark:text-stone-400">
+                                       text-stone-500
+                                       dark:text-stone-400">
 
                                 {{ $items->count() }}
                                 {{ $items->count() === 1 ? 'item' : 'items' }}
@@ -326,7 +352,9 @@
                             $vendor = $vendorItems->first()->product->vendor;
                         @endphp
 
+
                         <div>
+
 
                             {{-- Vendor --}}
                             <div class="mb-3 flex items-center gap-2">
@@ -341,8 +369,8 @@
 
                                 <span
                                     class="text-sm font-bold
-                                       text-stone-900
-                                       dark:text-white">
+                                           text-stone-900
+                                           dark:text-white">
 
                                     {{ $vendor?->store_name ?? 'Store' }}
 
@@ -354,8 +382,8 @@
                             {{-- Products --}}
                             <div
                                 class="divide-y
-                                   divide-stone-200
-                                   dark:divide-stone-800">
+                                       divide-stone-200
+                                       dark:divide-stone-800">
 
                                 @foreach ($vendorItems as $item)
                                     @php
@@ -366,19 +394,20 @@
                                         $image = $product->images->first();
                                     @endphp
 
+
                                     <div wire:key="checkout-item-{{ $product->id }}"
                                         class="flex gap-4 py-4
-                                           first:pt-0
-                                           last:pb-0">
+                                               first:pt-0
+                                               last:pb-0">
 
 
                                         {{-- Product Image --}}
                                         <div
                                             class="h-20 w-20 flex-shrink-0
-                                               overflow-hidden
-                                               rounded-[8px]
-                                               bg-stone-100
-                                               dark:bg-stone-800">
+                                                   overflow-hidden
+                                                   rounded-[8px]
+                                                   bg-stone-100
+                                                   dark:bg-stone-800">
 
                                             @if ($image)
                                                 @php
@@ -387,13 +416,14 @@
                                                         : asset('storage/' . $image->image_path);
                                                 @endphp
 
+
                                                 <img src="{{ $imagePath }}" alt="{{ $product->name }}"
                                                     class="h-full w-full object-cover">
                                             @else
                                                 <div
                                                     class="flex h-full w-full
-                                                       items-center justify-center
-                                                       text-stone-400">
+                                                           items-center justify-center
+                                                           text-stone-400">
 
                                                     <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24"
                                                         stroke="currentColor">
@@ -414,28 +444,31 @@
                                         <div class="min-w-0 flex-1">
 
                                             <div
-                                                class="flex flex-col
-                                                   gap-2
-                                                   sm:flex-row
-                                                   sm:items-start
-                                                   sm:justify-between">
+                                                class="flex flex-col gap-2
+                                                       sm:flex-row
+                                                       sm:items-start
+                                                       sm:justify-between">
+
 
                                                 <div class="min-w-0">
 
+
+                                                    {{-- Product Name --}}
                                                     <h3
                                                         class="text-sm font-bold
-                                                           text-stone-900
-                                                           dark:text-white">
+                                                               text-stone-900
+                                                               dark:text-white">
 
                                                         {{ $product->name }}
 
                                                     </h3>
 
 
+                                                    {{-- Unit Price --}}
                                                     <p
                                                         class="mt-1 text-xs
-                                                           text-stone-500
-                                                           dark:text-stone-400">
+                                                               text-stone-500
+                                                               dark:text-stone-400">
 
                                                         {{ $unitPrice >= 0 ? '₱' . number_format($unitPrice, 2) . ' each' : 'Price unavailable' }}
 
@@ -444,18 +477,19 @@
 
                                                     <div
                                                         class="mt-2 flex flex-wrap
-                                                           items-center gap-2">
+                                                               items-center gap-2">
+
 
                                                         {{-- Quantity --}}
                                                         <span
                                                             class="rounded-full
-                                                               bg-stone-100
-                                                               px-2 py-1
-                                                               text-[10px]
-                                                               font-semibold
-                                                               text-stone-600
-                                                               dark:bg-stone-800
-                                                               dark:text-stone-400">
+                                                                   bg-stone-100
+                                                                   px-2 py-1
+                                                                   text-[10px]
+                                                                   font-semibold
+                                                                   text-stone-600
+                                                                   dark:bg-stone-800
+                                                                   dark:text-stone-400">
 
                                                             Quantity: {{ $quantity }}
 
@@ -466,20 +500,20 @@
                                                         @if ($product->stock >= $quantity)
                                                             <span
                                                                 class="inline-flex
-                                                                   items-center gap-1
-                                                                   rounded-full
-                                                                   bg-emerald-50
-                                                                   px-2 py-1
-                                                                   text-[10px]
-                                                                   font-semibold
-                                                                   text-emerald-700
-                                                                   dark:bg-emerald-950/30
-                                                                   dark:text-emerald-400">
+                                                                       items-center gap-1
+                                                                       rounded-full
+                                                                       bg-emerald-50
+                                                                       px-2 py-1
+                                                                       text-[10px]
+                                                                       font-semibold
+                                                                       text-emerald-700
+                                                                       dark:bg-emerald-950/30
+                                                                       dark:text-emerald-400">
 
                                                                 <span
                                                                     class="h-1.5 w-1.5
-                                                                       rounded-full
-                                                                       bg-emerald-500">
+                                                                           rounded-full
+                                                                           bg-emerald-500">
                                                                 </span>
 
                                                                 In stock
@@ -488,13 +522,13 @@
                                                         @else
                                                             <span
                                                                 class="rounded-full
-                                                                   bg-red-50
-                                                                   px-2 py-1
-                                                                   text-[10px]
-                                                                   font-semibold
-                                                                   text-red-700
-                                                                   dark:bg-red-950/30
-                                                                   dark:text-red-400">
+                                                                       bg-red-50
+                                                                       px-2 py-1
+                                                                       text-[10px]
+                                                                       font-semibold
+                                                                       text-red-700
+                                                                       dark:bg-red-950/30
+                                                                       dark:text-red-400">
 
                                                                 Insufficient stock
 
@@ -509,14 +543,14 @@
                                                 {{-- Item Subtotal --}}
                                                 <div
                                                     class="flex-shrink-0
-                                                       text-left
-                                                       sm:text-right">
+                                                           text-left
+                                                           sm:text-right">
 
                                                     <p
                                                         class="text-[10px]
-                                                           uppercase
-                                                           tracking-wider
-                                                           text-stone-400">
+                                                               uppercase
+                                                               tracking-wider
+                                                               text-stone-400">
 
                                                         Item total
 
@@ -524,7 +558,7 @@
 
                                                     <p
                                                         class="mt-1 text-sm font-bold
-                                                           text-[#F1641E]">
+                                                               text-[#F1641E]">
 
                                                         ₱{{ number_format($itemSubtotal, 2) }}
 
@@ -548,150 +582,212 @@
 
             </section>
 
+        </div>
+
+
+        {{-- ===================================================== --}}
+        {{-- RIGHT COLUMN                                            --}}
+        {{-- ===================================================== --}}
+
+        <div class="lg:col-span-4">
+
 
             {{-- ================================================= --}}
-            {{-- PAYMENT                                            --}}
+            {{-- STICKY CHECKOUT CARD                               --}}
             {{-- ================================================= --}}
 
-            <section
-                class="rounded-[10px]
-                   border border-stone-200/80
-                   bg-white
-                   p-5
-                   dark:border-stone-800/80
-                   dark:bg-[#1A1A1A]">
+            <div
+                class="lg:sticky lg:top-6
+                       rounded-[10px]
+                       border border-stone-200/80
+                       bg-white
+                       p-5
+                       dark:border-stone-800/80
+                       dark:bg-[#1A1A1A]">
 
-                <div>
 
-                    <h2
-                        class="text-lg font-bold
+                {{-- ================================================= --}}
+                {{-- ORDER SUMMARY                                      --}}
+                {{-- ================================================= --}}
+
+                <h2
+                    class="text-lg font-bold
                            text-stone-900
                            dark:text-white">
 
-                        Payment Method
+                    Order Summary
 
-                    </h2>
+                </h2>
 
-                    <p class="mt-1 text-xs text-stone-500 dark:text-stone-400">
 
-                        Secure payment powered by Stripe.
+                {{-- Items --}}
+                <div class="mt-5 flex justify-between">
 
-                    </p>
+                    <span
+                        class="text-sm
+                               text-stone-500
+                               dark:text-stone-400">
+
+                        Items
+
+                    </span>
+
+                    <span
+                        class="text-sm font-semibold
+                               text-stone-900
+                               dark:text-white">
+
+                        {{ $items->count() }}
+
+                    </span>
 
                 </div>
 
 
-                {{-- ================================================= --}}
-                {{-- STRIPE SECURITY INFORMATION                       --}}
-                {{-- ================================================= --}}
+                {{-- Quantity --}}
+                <div class="mt-2 flex justify-between">
 
+                    <span
+                        class="text-sm
+                               text-stone-500
+                               dark:text-stone-400">
+
+                        Total quantity
+
+                    </span>
+
+                    <span
+                        class="text-sm font-semibold
+                               text-stone-900
+                               dark:text-white">
+
+                        {{ $items->sum('quantity') }}
+
+                    </span>
+
+                </div>
+
+
+                {{-- Subtotal --}}
                 <div
-                    class="mt-5 rounded-[8px]
-                       border border-stone-200
-                       bg-stone-50
-                       p-4
-                       dark:border-stone-800
-                       dark:bg-stone-900/50">
+                    class="mt-4 flex justify-between
+                           border-t border-stone-200
+                           pt-4
+                           dark:border-stone-800">
 
-                    <div class="flex gap-3">
+                    <span
+                        class="text-sm
+                               text-stone-500
+                               dark:text-stone-400">
 
-                        <div
-                            class="flex h-9 w-9 flex-shrink-0
-                               items-center justify-center
-                               rounded-full
-                               bg-emerald-100
+                        Subtotal
+
+                    </span>
+
+                    <span
+                        class="text-sm font-semibold
+                               text-stone-900
+                               dark:text-white">
+
+                        ₱{{ number_format($subtotal, 2) }}
+
+                    </span>
+
+                </div>
+
+
+                {{-- Shipping --}}
+                <div class="mt-3 flex justify-between">
+
+                    <span
+                        class="text-sm
+                               text-stone-500
+                               dark:text-stone-400">
+
+                        Shipping
+
+                    </span>
+
+                    <span
+                        class="text-sm font-semibold
                                text-emerald-600
-                               dark:bg-emerald-950/40
                                dark:text-emerald-400">
 
-                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        Free
 
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                                    d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z" />
+                    </span>
 
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                                    d="M9 12l2 2 4-4" />
-
-                            </svg>
-
-                        </div>
+                </div>
 
 
-                        <div>
+                {{-- Shipping Method --}}
+                <div
+                    class="mt-3 rounded-[8px]
+                           border border-stone-200
+                           bg-stone-50
+                           px-3 py-2.5
+                           dark:border-stone-800
+                           dark:bg-stone-900/50">
 
-                            <p
-                                class="text-sm font-semibold
-                                   text-stone-900
-                                   dark:text-white">
+                    <div class="flex justify-between gap-3">
 
-                                Secure payment
-
-                            </p>
-
-                            <p
-                                class="mt-1 text-xs leading-5
+                        <span
+                            class="text-xs
                                    text-stone-500
                                    dark:text-stone-400">
 
-                                Your payment information is securely processed
-                                by Stripe. Your card details are never stored
-                                on our server.
+                            Shipping method
 
-                            </p>
+                        </span>
 
-                        </div>
+                        <span
+                            class="text-xs font-semibold
+                                   text-stone-700
+                                   dark:text-stone-300">
+
+                            Standard Delivery
+
+                        </span>
 
                     </div>
 
                 </div>
 
 
+                {{-- Total --}}
+                <div
+                    class="mt-5 flex items-end justify-between
+                           border-t border-stone-200
+                           pt-4
+                           dark:border-stone-800">
+
+                    <span
+                        class="font-bold
+                               text-stone-900
+                               dark:text-white">
+
+                        Total
+
+                    </span>
+
+                    <span class="text-2xl font-extrabold
+                               text-[#F1641E]">
+
+                        ₱{{ number_format($total, 2) }}
+
+                    </span>
+
+                </div>
+
+
                 {{-- ================================================= --}}
-                {{-- STRIPE PAYMENT ELEMENT                            --}}
+                {{-- PREPARE PAYMENT                                    --}}
                 {{-- ================================================= --}}
 
-                @if ($paymentPrepared && $paymentClientSecret)
-                    <div wire:key="stripe-payment-{{ $paymentIntentId }}" class="mt-5 space-y-4">
-
-                        <div
-                            class="border-t border-stone-200
-                               pt-5
-                               dark:border-stone-800">
-
-                            <h3
-                                class="mb-3 text-sm font-bold
-                                   text-stone-900
-                                   dark:text-white">
-
-                                Payment
-
-                            </h3>
-
-
-                            {{-- ================================================= --}}
-                            {{-- IMPORTANT: STRIPE MOUNTS HERE                      --}}
-                            {{-- ================================================= --}}
-
-                            <div id="payment-element" wire:ignore>
-                            </div>
-
-                        </div>
-
-
-                        {{-- ================================================= --}}
-                        {{-- PAYMENT MESSAGE                                   --}}
-                        {{-- ================================================= --}}
-
-                        <p id="payment-message" class="text-sm text-red-500">
-                        </p>
-
-
-                        {{-- ================================================= --}}
-                        {{-- COMPLETE PAYMENT                                  --}}
-                        {{-- ================================================= --}}
-
-                        <button type="button" id="submit-payment" disabled
-                            class="inline-flex w-full
+                @if (!$paymentPrepared)
+                    <button type="button" wire:click="preparePayment" wire:loading.attr="disabled"
+                        wire:target="preparePayment"
+                        class="mt-6 inline-flex w-full
                                items-center justify-center
                                gap-2
                                rounded-[10px]
@@ -710,218 +806,6 @@
                                disabled:cursor-not-allowed
                                disabled:opacity-50
                                dark:focus:ring-offset-[#121212]">
-
-                            Loading payment form...
-
-                        </button>
-
-                    </div>
-                @endif
-
-
-                {{-- ================================================= --}}
-                {{-- STRIPE PAYMENT ERROR                              --}}
-                {{-- ================================================= --}}
-
-                <div id="stripe-payment-error" class="mt-3 text-sm text-red-600 dark:text-red-400">
-                </div>
-
-            </section>
-
-        </div>
-
-
-        {{-- ===================================================== --}}
-        {{-- RIGHT COLUMN                                          --}}
-        {{-- ===================================================== --}}
-
-        <div class="lg:col-span-4">
-
-            <div
-                class="lg:sticky lg:top-6
-                   rounded-[10px]
-                   border border-stone-200/80
-                   bg-white
-                   p-5
-                   dark:border-stone-800/80
-                   dark:bg-[#1A1A1A]">
-
-
-                {{-- ================================================= --}}
-                {{-- ORDER SUMMARY                                      --}}
-                {{-- ================================================= --}}
-
-                <h2
-                    class="text-lg font-bold
-                       text-stone-900
-                       dark:text-white">
-
-                    Order Summary
-
-                </h2>
-
-
-                {{-- Items --}}
-                <div class="mt-5 flex justify-between">
-
-                    <span class="text-sm text-stone-500 dark:text-stone-400">
-                        Items
-                    </span>
-
-                    <span
-                        class="text-sm font-semibold
-                           text-stone-900
-                           dark:text-white">
-
-                        {{ $items->count() }}
-
-                    </span>
-
-                </div>
-
-
-                {{-- Quantity --}}
-                <div class="mt-2 flex justify-between">
-
-                    <span class="text-sm text-stone-500 dark:text-stone-400">
-                        Total quantity
-                    </span>
-
-                    <span
-                        class="text-sm font-semibold
-                           text-stone-900
-                           dark:text-white">
-
-                        {{ $items->sum('quantity') }}
-
-                    </span>
-
-                </div>
-
-
-                {{-- Subtotal --}}
-                <div
-                    class="mt-4 flex justify-between
-                       border-t border-stone-200
-                       pt-4
-                       dark:border-stone-800">
-
-                    <span class="text-sm text-stone-500 dark:text-stone-400">
-                        Subtotal
-                    </span>
-
-                    <span
-                        class="text-sm font-semibold
-                           text-stone-900
-                           dark:text-white">
-
-                        ₱{{ number_format($subtotal, 2) }}
-
-                    </span>
-
-                </div>
-
-
-                {{-- Shipping --}}
-                <div class="mt-3 flex justify-between">
-
-                    <span class="text-sm text-stone-500 dark:text-stone-400">
-                        Shipping
-                    </span>
-
-                    <span
-                        class="text-sm font-semibold
-                           text-emerald-600
-                           dark:text-emerald-400">
-
-                        Free
-
-                    </span>
-
-                </div>
-
-
-                {{-- Shipping method --}}
-                <div
-                    class="mt-3 rounded-[8px]
-                       border border-stone-200
-                       bg-stone-50
-                       px-3 py-2.5
-                       dark:border-stone-800
-                       dark:bg-stone-900/50">
-
-                    <div class="flex justify-between gap-3">
-
-                        <span class="text-xs text-stone-500 dark:text-stone-400">
-                            Shipping method
-                        </span>
-
-                        <span
-                            class="text-xs font-semibold
-                               text-stone-700
-                               dark:text-stone-300">
-
-                            Standard Delivery
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                {{-- Total --}}
-                <div
-                    class="mt-5 flex items-end justify-between
-                       border-t border-stone-200
-                       pt-4
-                       dark:border-stone-800">
-
-                    <span
-                        class="font-bold
-                           text-stone-900
-                           dark:text-white">
-
-                        Total
-
-                    </span>
-
-                    <span class="text-2xl font-extrabold
-                           text-[#F1641E]">
-
-                        ₱{{ number_format($total, 2) }}
-
-                    </span>
-
-                </div>
-
-
-                {{-- ================================================= --}}
-                {{-- PREPARE PAYMENT                                   --}}
-                {{-- ================================================= --}}
-
-                @if (!$paymentPrepared)
-                    <button type="button" wire:click="preparePayment" wire:loading.attr="disabled"
-                        wire:target="preparePayment"
-                        class="mt-6 inline-flex w-full
-                           items-center justify-center
-                           gap-2
-                           rounded-[10px]
-                           border border-transparent
-                           bg-[#F1641E]
-                           px-4 py-3
-                           text-sm font-bold
-                           text-white
-                           transition
-                           hover:bg-[#d95716]
-                           active:scale-[0.98]
-                           focus:outline-none
-                           focus:ring-2
-                           focus:ring-[#F1641E]
-                           focus:ring-offset-2
-                           disabled:cursor-not-allowed
-                           disabled:opacity-50
-                           dark:focus:ring-offset-[#121212]">
 
 
                         {{-- Normal --}}
@@ -960,19 +844,20 @@
 
                     </button>
                 @else
+                    {{-- Payment Ready --}}
                     <div
                         class="mt-6 rounded-[8px]
-                           border border-emerald-200
-                           bg-emerald-50
-                           px-4 py-3
-                           dark:border-emerald-900/50
-                           dark:bg-emerald-950/20">
+                               border border-emerald-200
+                               bg-emerald-50
+                               px-4 py-3
+                               dark:border-emerald-900/50
+                               dark:bg-emerald-950/20">
 
                         <div class="flex gap-3">
 
                             <svg class="h-5 w-5 flex-shrink-0
-                                   text-emerald-600
-                                   dark:text-emerald-400"
+                                       text-emerald-600
+                                       dark:text-emerald-400"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
@@ -980,12 +865,13 @@
 
                             </svg>
 
+
                             <div>
 
                                 <p
                                     class="text-sm font-semibold
-                                       text-emerald-800
-                                       dark:text-emerald-300">
+                                           text-emerald-800
+                                           dark:text-emerald-300">
 
                                     Payment ready
 
@@ -993,8 +879,8 @@
 
                                 <p
                                     class="mt-1 text-xs
-                                       text-emerald-700
-                                       dark:text-emerald-400">
+                                           text-emerald-700
+                                           dark:text-emerald-400">
 
                                     Your payment session has been prepared securely.
 
@@ -1009,14 +895,102 @@
 
 
                 {{-- ================================================= --}}
+                {{-- STRIPE PAYMENT ELEMENT                            --}}
+                {{-- ================================================= --}}
+
+                @if ($paymentPrepared && $paymentClientSecret)
+                    <div wire:key="stripe-payment-{{ $paymentIntentId }}" class="mt-6">
+
+
+                        {{-- Divider --}}
+                        <div
+                            class="border-t border-stone-200
+                                   pt-5
+                                   dark:border-stone-800">
+
+
+                            {{-- Payment Heading --}}
+                            <h3
+                                class="mb-4 text-sm font-bold
+                                       text-stone-900
+                                       dark:text-white">
+
+                                Payment
+
+                            </h3>
+
+
+                            {{-- ================================================= --}}
+                            {{-- STRIPE MOUNTS HERE                              --}}
+                            {{-- ================================================= --}}
+
+                            <div id="payment-element" wire:ignore>
+                            </div>
+
+                        </div>
+
+
+                        {{-- ================================================= --}}
+                        {{-- PAYMENT MESSAGE                                   --}}
+                        {{-- ================================================= --}}
+
+                        <p id="payment-message" class="mt-3 text-sm text-red-500">
+                        </p>
+
+
+                        {{-- ================================================= --}}
+                        {{-- STRIPE PAYMENT ERROR                              --}}
+                        {{-- ================================================= --}}
+
+                        <div id="stripe-payment-error"
+                            class="mt-3 text-sm
+                                   text-red-600
+                                   dark:text-red-400">
+                        </div>
+
+
+                        {{-- ================================================= --}}
+                        {{-- COMPLETE PAYMENT                                  --}}
+                        {{-- ================================================= --}}
+
+                        <button type="button" id="submit-payment" disabled
+                            class="mt-4 inline-flex w-full
+                                   items-center justify-center
+                                   gap-2
+                                   rounded-[10px]
+                                   border border-transparent
+                                   bg-[#F1641E]
+                                   px-4 py-3
+                                   text-sm font-bold
+                                   text-white
+                                   transition
+                                   hover:bg-[#d95716]
+                                   active:scale-[0.98]
+                                   focus:outline-none
+                                   focus:ring-2
+                                   focus:ring-[#F1641E]
+                                   focus:ring-offset-2
+                                   disabled:cursor-not-allowed
+                                   disabled:opacity-50
+                                   dark:focus:ring-offset-[#121212]">
+
+                            Loading payment form...
+
+                        </button>
+
+                    </div>
+                @endif
+
+
+                {{-- ================================================= --}}
                 {{-- SECURITY NOTE                                     --}}
                 {{-- ================================================= --}}
 
                 <p
-                    class="mt-3 text-center
-                       text-[11px]
-                       leading-4
-                       text-stone-400">
+                    class="mt-4 text-center
+                           text-[11px]
+                           leading-4
+                           text-stone-400">
 
                     By continuing, you agree to complete payment
                     for the selected items.
@@ -1029,4 +1003,5 @@
         </div>
 
     </div>
+
 </div>
