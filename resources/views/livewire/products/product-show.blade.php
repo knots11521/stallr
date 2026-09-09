@@ -190,7 +190,7 @@
              </div>
 
             <!-- Reviews Section -->
-            <livewire:review-section :product="$product" :key="'reviews-' . $product->id" />
+            <livewire:products.review-section :product="$product" :key="'reviews-' . $product->id" />
 
         </div>
 
