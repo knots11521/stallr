@@ -3,32 +3,27 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Models\Cart;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable, HasRoles;
-
+    use HasFactory, HasRoles, Notifiable;
 
     public function canAccessPanel(Panel $panel): bool
     {
         return match ($panel->getId()) {
             'admin' => $this->hasRole('Admin'),
-            'vendor' => $this->hasRole('Vendor'),
+            'vendor' => $this->hasRole('Vendor') && $this->vendor?->is_active,
             default => false,
         };
     }
-
 
     protected $fillable = [
         'name',
@@ -41,12 +36,10 @@ class User extends Authenticatable implements FilamentUser
         'is_active',
     ];
 
-
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
 
     protected function casts(): array
     {
@@ -56,7 +49,6 @@ class User extends Authenticatable implements FilamentUser
             'is_active' => 'boolean',
         ];
     }
-
 
     public function vendorApplication()
     {

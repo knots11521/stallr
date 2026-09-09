@@ -187,9 +187,12 @@
                         available
                     </span>
 
-                </div>
+             </div>
 
-            </div>
+            <!-- Reviews Section -->
+            <livewire:review-section :product="$product" :key="'reviews-' . $product->id" />
+
+        </div>
 
             <!-- Purchase Actions -->
             <div

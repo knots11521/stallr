@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Product extends Model
 {
@@ -20,17 +21,23 @@ class Product extends Model
         'sku',
         'price',
         'stock',
+        'low_stock_threshold',
         'description',
         'status',
         'is_featured',
         'approved_at',
         'approved_by',
+        'average_rating',
+        'review_count',
     ];
 
     protected $casts = [
         'approved_at' => 'datetime',
         'price' => 'decimal:2',
         'is_featured' => 'boolean',
+        'low_stock_threshold' => 'integer',
+        'average_rating' => 'decimal:2',
+        'review_count' => 'integer',
     ];
 
     /*
@@ -179,5 +186,31 @@ class Product extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function reviews(): MorphMany
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function recalculateRating(): void
+    {
+        $approvedReviews = $this->reviews()->where('status', 'approved');
+
+        $this->average_rating = (float) $approvedReviews->avg('rating');
+        $this->review_count = $approvedReviews->count();
+        $this->save();
+    }
+
+    public function scopeTopRated($query)
+    {
+        return $query->orderByDesc('average_rating');
+    }
+
+    public function scopeRating($query, ?float $min): void
+    {
+        $query->when($min !== null, function ($q) use ($min) {
+            $q->where('average_rating', '>=', $min);
+        });
     }
 }

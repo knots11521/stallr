@@ -113,6 +113,10 @@ class CartService
             throw ValidationException::withMessages(['cart' => 'This product is no longer available.']);
         }
 
+        if (! $product->vendor || ! $product->vendor->is_active) {
+            throw ValidationException::withMessages(['cart' => 'This vendor is no longer accepting orders.']);
+        }
+
         if ($product->stock < $quantity) {
             throw ValidationException::withMessages([
                 'cart' => "Only {$product->stock} of {$product->name} are available.",

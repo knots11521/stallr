@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\OrderPlaced;
+use App\Events\ProductLowStock;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
@@ -120,7 +121,15 @@ class OrderService
                 }
             }
             foreach ($items as $item) {
-                $products->get($item->product_id)->decrement('stock', $item->quantity);
+                $product = $products->get($item->product_id);
+
+                $previousStock = $product->stock;
+                $product->decrement('stock', $item->quantity);
+
+                if ($product->stock <= $product->low_stock_threshold
+                    && $previousStock > $product->low_stock_threshold) {
+                    ProductLowStock::dispatch($product->fresh());
+                }
             }
 
             $order->vendorOrders()->update(['status' => 'processing']);

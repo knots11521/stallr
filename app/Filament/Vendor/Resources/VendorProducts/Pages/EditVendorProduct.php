@@ -4,8 +4,6 @@ namespace App\Filament\Vendor\Resources\VendorProducts\Pages;
 
 use App\Filament\Vendor\Resources\VendorProducts\VendorProductResource;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\ForceDeleteAction;
-use Filament\Actions\RestoreAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +16,6 @@ class EditVendorProduct extends EditRecord
      * Image paths submitted by the FileUpload field.
      */
     protected array $submittedImagePaths = [];
-
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +38,6 @@ class EditVendorProduct extends EditRecord
 
         return $data;
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +110,6 @@ class EditVendorProduct extends EditRecord
         return $data;
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | After Save
@@ -150,7 +145,6 @@ class EditVendorProduct extends EditRecord
         }
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Redirect
@@ -164,7 +158,6 @@ class EditVendorProduct extends EditRecord
         ]);
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Header Actions
@@ -176,8 +169,6 @@ class EditVendorProduct extends EditRecord
         return [
             ViewAction::make(),
             DeleteAction::make(),
-            ForceDeleteAction::make(),
-            RestoreAction::make(),
         ];
     }
 }

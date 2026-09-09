@@ -7,21 +7,21 @@
     <div class="text-center mb-10">
 
         {{-- Success Icon --}}
-        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-            <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
+            <svg class="h-8 w-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4 L19 7" />
             </svg>
         </div>
 
-        <h1 class="text-3xl font-bold text-stone-900">
+        <h1 class="text-3xl font-bold text-stone-900 dark:text-stone-100">
             Order Confirmed!
         </h1>
 
-        <p class="mt-2 text-sm text-stone-500">
+        <p class="mt-2 text-sm text-stone-500 dark:text-stone-400">
             Thank you for your purchase.
         </p>
 
-        <p class="mt-1 text-sm text-stone-500">
+        <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">
             Your order has been successfully placed.
         </p>
 
@@ -32,19 +32,19 @@
     {{-- ORDER SUMMARY --}}
     {{-- ============================================================= --}}
 
-    <div class="mb-6 rounded-[14px] border border-stone-200 bg-white overflow-hidden">
+    <div class="mb-6 rounded-[14px] border border-stone-200 dark:border-stone-700 bg-white dark:bg-[#1A1A1A] overflow-hidden">
 
-        <div class="px-6 py-5 border-b border-stone-100">
+        <div class="px-6 py-5 border-b border-stone-100 dark:border-stone-700">
 
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 
                 <div>
 
-                    <p class="text-xs uppercase tracking-wide text-stone-400">
+                    <p class="text-xs uppercase tracking-wide text-stone-400 dark:text-stone-500">
                         Order Number
                     </p>
 
-                    <p class="mt-1 text-lg font-bold text-stone-900">
+                    <p class="mt-1 text-lg font-bold text-stone-900 dark:text-stone-100">
                         {{ $order->order_number }}
                     </p>
 
@@ -53,12 +53,12 @@
 
                 <div class="text-left sm:text-right">
 
-                    <p class="text-xs uppercase tracking-wide text-stone-400">
+                    <p class="text-xs text-stone-400 dark:text-stone-500">
                         Payment
                     </p>
 
                     <span
-                        class="inline-flex mt-1 items-center rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                        class="inline-flex mt-1 items-center rounded-full bg-green-100 dark:bg-green-900/30 px-3 py-1 text-xs font-semibold text-green-700 dark:text-green-400">
                         Paid
                     </span>
 
@@ -76,11 +76,11 @@
 
                 <div>
 
-                    <p class="text-xs text-stone-400">
+                    <p class="text-xs text-stone-400 dark:text-stone-500">
                         Order Date
                     </p>
 
-                    <p class="mt-1 text-sm font-medium text-stone-800">
+                    <p class="mt-1 text-sm font-medium text-stone-800 dark:text-stone-200">
                         {{ $order->created_at->format('M d, Y h:i A') }}
                     </p>
 
@@ -89,11 +89,11 @@
 
                 <div>
 
-                    <p class="text-xs text-stone-400">
+                    <p class="text-xs text-stone-400 dark:text-stone-500">
                         Order Status
                     </p>
 
-                    <p class="mt-1 text-sm font-medium text-stone-800 capitalize">
+                    <p class="mt-1 text-sm font-medium text-stone-800 dark:text-stone-200 capitalize">
                         {{ $order->status }}
                     </p>
 
@@ -102,11 +102,11 @@
 
                 <div>
 
-                    <p class="text-xs text-stone-400">
+                    <p class="text-xs text-stone-400 dark:text-stone-500">
                         Payment Status
                     </p>
 
-                    <p class="mt-1 text-sm font-medium text-green-600 capitalize">
+                    <p class="mt-1 text-sm font-medium text-green-600 dark:text-green-400 capitalize">
                         {{ $order->payment_status }}
                     </p>
 
@@ -126,20 +126,20 @@
     <div class="space-y-6">
 
         @foreach ($order->vendorOrders as $vendorOrder)
-            <div class="rounded-[14px] border border-stone-200 bg-white overflow-hidden">
+            <div class="rounded-[14px] border border-stone-200 dark:border-stone-700 bg-white dark:bg-[#1A1A1A] overflow-hidden">
 
                 {{-- Vendor Header --}}
-                <div class="px-6 py-4 border-b border-stone-100 bg-stone-50">
+                <div class="px-6 py-4 border-b border-stone-100 dark:border-stone-700 bg-stone-50 dark:bg-stone-800">
 
                     <div class="flex items-center justify-between gap-4">
 
                         <div>
 
-                            <p class="text-xs uppercase tracking-wide text-stone-400">
+                            <p class="text-xs uppercase tracking-wide text-stone-400 dark:text-stone-500">
                                 Store
                             </p>
 
-                            <h2 class="mt-1 text-sm font-bold text-stone-900">
+                            <h2 class="mt-1 text-sm font-bold text-stone-900 dark:text-stone-100">
                                 {{ $vendorOrder->vendor?->store_name ?? 'Store' }}
                             </h2>
 
@@ -148,11 +148,11 @@
 
                         <div class="text-right">
 
-                            <p class="text-xs text-stone-400">
+                            <p class="text-xs text-stone-400 dark:text-stone-500">
                                 Status
                             </p>
 
-                            <p class="mt-1 text-xs font-semibold text-stone-700 capitalize">
+                            <p class="mt-1 text-xs font-semibold text-stone-700 dark:text-stone-300 capitalize">
                                 {{ $vendorOrder->status }}
                             </p>
 
@@ -164,7 +164,7 @@
 
 
                 {{-- Products --}}
-                <div class="divide-y divide-stone-100">
+                <div class="divide-y divide-stone-100 dark:divide-stone-700">
 
                     @foreach ($vendorOrder->items as $item)
                         <div class="px-6 py-5">
@@ -174,18 +174,18 @@
                                 {{-- Product --}}
                                 <div class="min-w-0">
 
-                                    <h3 class="text-sm font-semibold text-stone-900">
+                                    <h3 class="text-sm font-semibold text-stone-900 dark:text-stone-100">
                                         {{ $item->product_name }}
                                     </h3>
 
                                     <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
 
-                                        <p class="text-xs text-stone-500">
+                                        <p class="text-xs text-stone-500 dark:text-stone-400">
                                             Quantity:
                                             {{ $item->quantity }}
                                         </p>
 
-                                        <p class="text-xs text-stone-500">
+                                        <p class="text-xs text-stone-500 dark:text-stone-400">
                                             ₱{{ number_format($item->unit_price, 2) }}
                                             each
                                         </p>
@@ -198,7 +198,7 @@
                                 {{-- Item Total --}}
                                 <div class="text-right flex-shrink-0">
 
-                                    <p class="text-sm font-bold text-stone-900">
+                                    <p class="text-sm font-bold text-stone-900 dark:text-stone-100">
                                         ₱{{ number_format($item->subtotal, 2) }}
                                     </p>
 
@@ -213,15 +213,15 @@
 
 
                 {{-- Vendor Total --}}
-                <div class="px-6 py-4 border-t border-stone-100">
+                <div class="px-6 py-4 border border-t border-stone-100 dark:border-stone-700">
 
                     <div class="flex items-center justify-between">
 
-                        <span class="text-sm font-medium text-stone-500">
+                        <span class="text-sm font-medium text-stone-500 dark:text-stone-400">
                             Store Total
                         </span>
 
-                        <span class="text-sm font-bold text-stone-900">
+                        <span class="text-sm font-bold text-stone-900 dark:text-stone-100">
                             ₱{{ number_format($vendorOrder->total, 2) }}
                         </span>
 
@@ -239,17 +239,17 @@
     {{-- ORDER TOTAL --}}
     {{-- ============================================================= --}}
 
-    <div class="mt-6 rounded-[14px] border border-stone-200 bg-white">
+    <div class="mt-6 rounded-[14px] border border-stone-200 dark:border-stone-700 bg-white dark:bg-[#1A1A1A]">
 
         <div class="p-6 space-y-4">
 
             <div class="flex items-center justify-between">
 
-                <span class="text-sm text-stone-500">
+                <span class="text-sm text-stone-500 dark:text-stone-400">
                     Subtotal
                 </span>
 
-                <span class="text-sm font-medium text-stone-800">
+                <span class="text-sm font-medium text-stone-800 dark:text-stone-200">
                     ₱{{ number_format($order->subtotal, 2) }}
                 </span>
 
@@ -258,22 +258,22 @@
 
             <div class="flex items-center justify-between">
 
-                <span class="text-sm text-stone-500">
+                <span class="text-sm text-stone-500 dark:text-stone-400">
                     Shipping
                 </span>
 
-                <span class="text-sm font-medium text-stone-800">
+                <span class="text-sm font-medium text-stone-800 dark:text-stone-200">
                     Free
                 </span>
 
             </div>
 
 
-            <div class="border-t border-stone-100 pt-4">
+            <div class="border-t border-stone-100 dark:border-stone-700 pt-4">
 
                 <div class="flex items-center justify-between">
 
-                    <span class="text-base font-bold text-stone-900">
+                    <span class="text-base font-bold text-stone-900 dark:text-stone-100">
                         Total
                     </span>
 

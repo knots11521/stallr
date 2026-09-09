@@ -1,19 +1,45 @@
-<title>
-    {{ $paymentSuccessful ? 'Payment Successful' : 'Payment Processing' }}
-</title>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {{ $paymentSuccessful ? 'Payment Successful' : 'Payment Processing' }}
+    </title>
 
-<script>
-    tailwind.config = {
-        darkMode: 'class'
-    }
-</script>
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="alternate icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
-<main class="min-h-screen flex items-center justify-center px-4 py-12">
+    <!-- Apply the persisted theme (or OS preference) before paint to avoid FOUC -->
+    <x-theme-init />
 
-    <div
-        class="w-full max-w-lg
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700&display=swap" rel="stylesheet" />
+
+    <!-- Alpine.js for dark mode toggle -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="font-['Plus_Jakarta_Sans',sans-serif] antialiased bg-slate-50 dark:bg-[#121212] text-slate-800 dark:text-slate-100">
+
+    <!-- Theme toggle (fixed position) -->
+    <div class="fixed top-4 right-4 z-50">
+        <x-theme-toggle />
+    </div>
+
+    <main class="min-h-screen flex items-center justify-center px-4 py-12">
+
+        <div
+            class="w-full max-w-lg
                bg-white dark:bg-[#1A1A1A]
                border border-stone-200 dark:border-stone-800
                rounded-[16px]
@@ -21,10 +47,10 @@
                text-center
                shadow-sm dark:shadow-none">
 
-        @if ($paymentSuccessful)
-            <!-- Success Icon -->
-            <div
-                class="mx-auto
+            @if ($paymentSuccessful)
+                <!-- Success Icon -->
+                <div
+                    class="mx-auto
                        w-16 h-16
                        rounded-full
                        bg-emerald-50 dark:bg-emerald-950/30
@@ -32,114 +58,114 @@
                        flex items-center justify-center
                        text-emerald-500">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
 
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75" />
 
-                    <circle cx="12" cy="12" r="9" />
+                        <circle cx="12" cy="12" r="9" />
 
-                </svg>
+                    </svg>
 
-            </div>
+                </div>
 
 
-            <!-- Heading -->
-            <h1
-                class="mt-6
+                <!-- Heading -->
+                <h1
+                    class="mt-6
                        text-2xl sm:text-3xl
                        font-extrabold
                        tracking-tight
                        text-stone-900
                        dark:text-white">
 
-                Payment Successful!
+                    Payment Successful!
 
-            </h1>
+                </h1>
 
 
-            <!-- Description -->
-            <p
-                class="max-w-sm mx-auto
+                <!-- Description -->
+                <p
+                    class="max-w-sm mx-auto
                        mt-3
                        text-sm
                        leading-6
                        text-stone-500
                        dark:text-stone-400">
 
-                Thank you for your order. Your payment has been
-                successfully confirmed.
+                    Thank you for your order. Your payment has been
+                    successfully confirmed.
 
-            </p>
+                </p>
 
 
-            <!-- Payment Status -->
-            <div
-                class="mt-6
+                <!-- Payment Status -->
+                <div
+                    class="mt-6
                        flex items-center justify-center gap-2
                        rounded-[10px]
                        bg-stone-50 dark:bg-stone-900/60
                        border border-stone-200 dark:border-stone-800
                        px-4 py-3">
 
-                <span class="w-2 h-2
+                    <span class="w-2 h-2
                            rounded-full
                            bg-emerald-500">
-                </span>
+                    </span>
 
-                <span
-                    class="text-xs
+                    <span
+                        class="text-xs
                            font-semibold
                            text-stone-600
                            dark:text-stone-300">
 
-                    Payment confirmed
+                        Payment confirmed
 
-                </span>
+                    </span>
 
-            </div>
+                </div>
 
 
-            <!-- Payment ID -->
-            <div
-                class="mt-3
+                <!-- Payment ID -->
+                <div
+                    class="mt-3
                        rounded-[10px]
                        bg-stone-50 dark:bg-stone-900/40
                        border border-stone-200 dark:border-stone-800
                        px-4 py-3">
 
-                <p
-                    class="text-[10px]
+                    <p
+                        class="text-[10px]
                            uppercase
                            tracking-wider
                            font-bold
                            text-stone-400">
 
-                    Payment Reference
+                        Payment Reference
 
-                </p>
+                    </p>
 
-                <p
-                    class="mt-1
+                    <p
+                        class="mt-1
                            text-xs
                            font-mono
                            break-all
                            text-stone-600
                            dark:text-stone-300">
 
-                    {{ $paymentIntent->id }}
+                        {{ $paymentIntent->id }}
 
-                </p>
+                    </p>
 
-            </div>
+                </div>
 
 
-            <!-- Actions -->
-            <div class="mt-6 space-y-2">
+                <!-- Actions -->
+                <div class="mt-6 space-y-2">
 
-                <!-- View Orders -->
-                <a href="{{ isset($order) ? route('orders.show', $order) : route('orders.index') }}"
-                    class="w-full
+                    <!-- View Orders -->
+                    <a href="{{ isset($order) ? route('orders.show', $order) : route('orders.index') }}"
+                        class="w-full
                            inline-flex
                            items-center
                            justify-center
@@ -154,23 +180,23 @@
                            px-5 py-3
                            transition">
 
-                    <!-- Clipboard -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
+                        <!-- Clipboard -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
 
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 5h6m-7 4h8m-8 4h5m-7 7h12a2 2 0 002-2V6a2 2 0 00-2-2h-1.5a2 2 0 01-2-2h-3a2 2 0 01-2 2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 5h6m-7 4h8m-8 4h5m-7 7h12a2 2 0 002-2V6a2 2 0 00-2-2h-1.5a2 2 0 01-2-2h-3a2 2 0 01-2 2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 
-                    </svg>
+                        </svg>
 
-                    View My Orders
+                        View My Orders
 
-                </a>
+                    </a>
 
 
-                <!-- Continue Shopping -->
-                <a href="{{ route('products.index') }}" wire:navigate
-                    class="w-full
+                    <!-- Continue Shopping -->
+                    <a href="{{ route('products.index') }}"
+                        class="w-full
                            inline-flex
                            items-center
                            justify-center
@@ -188,38 +214,38 @@
                            px-5 py-3
                            transition">
 
-                    <!-- Shopping Bag -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
+                        <!-- Shopping Bag -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
 
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 8h12l1 12H5L6 8z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 8h12l1 12H5L6 8z" />
 
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 8V6a3 3 0 0 1 6 0v2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 8V6a3 3 0 0 1 6 0v2" />
 
-                    </svg>
+                        </svg>
 
-                    Continue Shopping
+                        Continue Shopping
 
-                </a>
+                    </a>
 
-            </div>
+                </div>
 
 
-            <!-- Confirmation -->
-            <p
-                class="mt-5
+                <!-- Confirmation -->
+                <p
+                    class="mt-5
                        text-[11px]
                        text-stone-400
                        dark:text-stone-500">
 
-                Your payment has been confirmed.
-                Your order is being processed.
+                    Your payment has been confirmed.
+                    Your order is being processed.
 
-            </p>
-        @else
-            <!-- Processing Icon -->
-            <div
-                class="mx-auto
+                </p>
+            @else
+                <!-- Processing Icon -->
+                <div
+                    class="mx-auto
                        w-16 h-16
                        rounded-full
                        bg-amber-50 dark:bg-amber-950/30
@@ -227,73 +253,73 @@
                        flex items-center justify-center
                        text-amber-500">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 animate-spin" fill="none" viewBox="0 0 24 24">
 
-                    <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor"
-                        stroke-width="2">
-                    </circle>
+                        <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor"
+                            stroke-width="2">
+                        </circle>
 
-                    <path class="opacity-75" fill="currentColor" d="M12 3a9 9 0 019 9h-2a7 7 0 00-7-7V3z">
-                    </path>
+                        <path class="opacity-75" fill="currentColor" d="M12 3a9 9 0 019 9h-2a7 7 0 00-7-7V3z">
+                        </path>
 
-                </svg>
+                    </svg>
 
-            </div>
+                </div>
 
 
-            <h1
-                class="mt-6
+                <h1
+                    class="mt-6
                        text-2xl sm:text-3xl
                        font-extrabold
                        tracking-tight
                        text-stone-900
                        dark:text-white">
 
-                Payment Processing
+                    Payment Processing
 
-            </h1>
+                </h1>
 
 
-            <p
-                class="max-w-sm mx-auto
+                <p
+                    class="max-w-sm mx-auto
                        mt-3
                        text-sm
                        leading-6
                        text-stone-500
                        dark:text-stone-400">
 
-                Your payment has not been confirmed yet.
-                Please wait while we verify the transaction.
+                    Your payment has not been confirmed yet.
+                    Please wait while we verify the transaction.
 
-            </p>
+                </p>
 
 
-            <div
-                class="mt-6
+                <div
+                    class="mt-6
                        rounded-[10px]
                        bg-amber-50 dark:bg-amber-950/20
                        border border-amber-100 dark:border-amber-900/40
                        px-4 py-3">
 
-                <p
-                    class="text-xs
+                    <p
+                        class="text-xs
                            font-semibold
                            text-amber-700
                            dark:text-amber-400">
 
-                    Payment status:
+                        Payment status:
 
-                    {{ $paymentIntent->status }}
+                        {{ $paymentIntent->status }}
 
-                </p>
+                    </p>
 
-            </div>
+                </div>
 
 
-            <div class="mt-6">
+                <div class="mt-6">
 
-                <a href="{{ route('cart') }}" wire:navigate
-                    class="w-full
+                    <a href="{{ route('cart') }}"
+                        class="w-full
                            inline-flex
                            items-center
                            justify-center
@@ -310,13 +336,16 @@
                            px-5 py-3
                            transition">
 
-                    Return to Cart
+                        Return to Cart
 
-                </a>
+                    </a>
 
-            </div>
-        @endif
+                </div>
+            @endif
 
-    </div>
+        </div>
 
-</main>
+    </main>
+</body>
+
+</html>

@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Spatie\Permission\PermissionRegistrar;
 
@@ -12,5 +13,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         app(PermissionRegistrar::class)->forgetCachedPermissions();
+
+        $this->seed(RoleSeeder::class);
     }
 }

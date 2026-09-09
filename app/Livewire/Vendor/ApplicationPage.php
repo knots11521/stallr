@@ -16,9 +16,11 @@ class ApplicationPage extends Component
         $user = Auth::user();
 
 
-        // Already a vendor
+        // Already a vendor — redirect to the vendor panel instead of a hard 403.
         if ($user->hasRole('Vendor')) {
-            abort(403);
+            $this->redirect('/vendor', navigate: false);
+
+            return;
         }
 
 

@@ -101,6 +101,7 @@
             fixed
             inset-0
             bg-black/30
+            dark:bg-black/50
             backdrop-blur-sm
             transition-opacity
         "
@@ -120,6 +121,7 @@
             overflow-hidden
             rounded-[5px]
             bg-white
+            dark:bg-[#1A1A1A]
             shadow-xl
             transition-all
             sm:w-full

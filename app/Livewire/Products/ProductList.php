@@ -32,6 +32,7 @@ class ProductList extends Component
     {
         $products = Product::query()
             ->approved()
+            ->whereHas('vendor', fn ($query) => $query->where('is_active', true))
             ->search($this->search)
             ->priceBetween(
                 $this->minPrice,
@@ -39,7 +40,7 @@ class ProductList extends Component
             )
             ->when(
                 $this->category,
-                fn($query) => $query->category($this->category)
+                fn ($query) => $query->category($this->category)
             )
             ->with([
                 'vendor.user',
@@ -56,13 +57,21 @@ class ProductList extends Component
                 $products->orderByDesc('price');
                 break;
 
+            case 'rating':
+                $products->orderByDesc('average_rating');
+                break;
+
+            case 'rating_low':
+                $products->orderBy('average_rating');
+                break;
+
             default:
                 $products->latest();
                 break;
         }
 
         return view('livewire.products.product-list', [
-            'products' => $products->paginate(12),
+            'products' => $products->paginate(12)->withQueryString()->withPath(request()->path()),
             'categories' => Category::orderBy('name')->get(),
         ]);
     }

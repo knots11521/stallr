@@ -2,18 +2,18 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Vendor\Widgets\VendorSalesChart;
 use App\Filament\Vendor\Widgets\VendorStats;
-
+use App\Filament\Vendor\Widgets\VendorTopProductsChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Navigation\NavigationItem;
-
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -28,6 +28,7 @@ class VendorPanelProvider extends PanelProvider
         return $panel
             ->id('vendor')
             ->path('vendor')
+            ->topbar(false)
 
             /*
             |--------------------------------------------------------------------------
@@ -39,13 +40,14 @@ class VendorPanelProvider extends PanelProvider
 
             /*
             |--------------------------------------------------------------------------
-            | Colors
+            | Colors & Theme
             |--------------------------------------------------------------------------
             */
 
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->viteTheme('resources/css/filament/vendor/theme.css')
 
             /*
             |--------------------------------------------------------------------------
@@ -102,6 +104,8 @@ class VendorPanelProvider extends PanelProvider
 
             ->widgets([
                 VendorStats::class,
+                VendorSalesChart::class,
+                VendorTopProductsChart::class,
             ])
 
             /*

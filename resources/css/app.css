@@ -17,6 +17,13 @@
     --color-primary-hover: #D85413;
     --color-primary-active: #B9470F;
 
+    /* Brand color scale (used by the welcome page; maps to the system primary #F1641E) */
+    --color-brand-50: #FFF7F0;
+    --color-brand-100: #FFE6D9;
+    --color-brand-500: #F1641E;
+    --color-brand-600: #D85413;
+    --color-brand-700: #B9470F;
+
     --color-surface: #F9F8F6;
     --color-elevated: #FFFFFF;
     --color-text: #1E293B;
@@ -70,6 +77,11 @@ body {
     background-color: var(--color-surface);
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
+}
+
+/* Hide elements with x-show until Alpine initializes */
+[x-cloak] {
+    display: none !important;
 }
 
 /* Global Transitions for UI changes */

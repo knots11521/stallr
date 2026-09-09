@@ -67,6 +67,18 @@ class UserSeeder extends Seeder
             'Vendor',
         ]);
 
+        // Create the Vendor profile so the user is a complete Customer + Vendor.
+        $user->vendor()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'store_name'  => env('SEED_VENDOR_STORE_NAME', "Nathaniel's Store"),
+                'slug' => env('SEED_VENDOR_SLUG', 'nathaniells-store'),
+                'description' => 'Stallr marketplace vendor store.',
+                'is_verified' => true,
+                'is_active'   => true,
+            ]
+        );
+
 
         // =========================================================
         // TWO FAKER CUSTOMERS

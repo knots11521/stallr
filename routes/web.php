@@ -11,6 +11,8 @@ use App\Livewire\Products\ProductList;
 use App\Livewire\Products\ProductShow;
 use App\Livewire\Vendor\ApplicationPage;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Vendor;
 use App\Http\Middleware\PreventAdminFromStore;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +25,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $featuredProducts = Product::query()
+        ->approved()
+        ->where('is_featured', true)
+        ->with(['vendor.user', 'categories', 'images'])
+        ->latest()
+        ->take(8)
+        ->get();
+
+    if ($featuredProducts->count() < 4) {
+        $featuredProducts = Product::query()
+            ->approved()
+            ->with(['vendor.user', 'categories', 'images'])
+            ->latest()
+            ->take(8)
+            ->get();
+    }
+
     return view('welcome', [
-        'categories' => Category::orderBy('name')->get(),
+        'categories' => Category::withCount('products')->orderBy('name')->get(),
+        'featuredProducts' => $featuredProducts,
+        'verifiedVendorCount' => Vendor::where('is_verified', true)->count(),
+        'productCount' => Product::approved()->count(),
     ]);
 })->name('home');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -152,8 +173,8 @@ Route::middleware('auth')->group(function () {
     | Vendor Application
     |--------------------------------------------------------------------------
     |
-    | Only Customers can submit a Vendor application.
-    | Vendors cannot submit another application.
+    | Only Customers can submit a new Vendor application.
+    | Existing Vendors are redirected to their vendor panel instead.
     |
     */
 

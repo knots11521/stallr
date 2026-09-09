@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 // use App\Filament\Auth\Login;
+use App\Filament\Admin\Widgets\PlatformRevenueChart;
+use App\Filament\Admin\Widgets\PlatformStats;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -20,7 +22,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -33,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarFullyCollapsibleOnDesktop()
             ->renderHook(
                 'panels::body.end',
-                fn() => view('components.global-loader')
+                fn () => view('components.global-loader')
             )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
@@ -58,6 +59,8 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+                PlatformStats::class,
+                PlatformRevenueChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

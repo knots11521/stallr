@@ -6,36 +6,28 @@ use App\Filament\Vendor\Resources\VendorProducts\Pages\CreateVendorProduct;
 use App\Filament\Vendor\Resources\VendorProducts\Pages\EditVendorProduct;
 use App\Filament\Vendor\Resources\VendorProducts\Pages\ListVendorProducts;
 use App\Filament\Vendor\Resources\VendorProducts\Pages\ViewVendorProduct;
-use App\Filament\Vendor\Resources\VendorProducts\Schemas\VendorProductForm;
 use App\Filament\Vendor\Resources\VendorProducts\Schemas\VendorProductInfolist;
 use App\Filament\Vendor\Resources\VendorProducts\Tables\VendorProductsTable;
-
 use App\Models\Product;
-
 use BackedEnum;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\FileUpload;
 
 class VendorProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-
     protected static ?string $recordTitleAttribute = 'name';
-
 
     public static function form(Schema $schema): Schema
     {
@@ -56,6 +48,12 @@ class VendorProductResource extends Resource
 
                 TextInput::make('stock')
                     ->numeric()
+                    ->required(),
+
+                TextInput::make('low_stock_threshold')
+                    ->numeric()
+                    ->minValue(0)
+                    ->default(5)
                     ->required(),
 
                 Textarea::make('description')
@@ -82,7 +80,6 @@ class VendorProductResource extends Resource
                     ->deletable()
                     ->dehydrated(true),
 
-
             ]);
     }
 
@@ -91,18 +88,15 @@ class VendorProductResource extends Resource
         return VendorProductInfolist::configure($schema);
     }
 
-
     public static function table(Table $table): Table
     {
         return VendorProductsTable::configure($table);
     }
 
-
     public static function getRelations(): array
     {
         return [];
     }
-
 
     public static function getPages(): array
     {
@@ -112,15 +106,6 @@ class VendorProductResource extends Resource
             'view' => ViewVendorProduct::route('/{record}'),
             'edit' => EditVendorProduct::route('/{record}/edit'),
         ];
-    }
-
-
-    public static function getRecordRouteBindingEloquentQuery(): Builder
-    {
-        return parent::getRecordRouteBindingEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
     }
 
     public static function getEloquentQuery(): Builder

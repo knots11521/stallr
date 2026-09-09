@@ -27,6 +27,7 @@ class VendorFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'is_verified' => true,
+            'is_active' => true,
         ];
     }
 }

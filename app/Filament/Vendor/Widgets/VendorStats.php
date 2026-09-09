@@ -2,7 +2,6 @@
 
 namespace App\Filament\Vendor\Widgets;
 
-use App\Models\Product;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -47,7 +46,7 @@ class VendorStats extends BaseWidget
             Stat::make(
                 'Low Stock Products',
                 $vendor->products()
-                    ->where('stock', '<=', 5)
+                    ->whereColumn('stock', '<=', 'low_stock_threshold')
                     ->count()
             ),
 

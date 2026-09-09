@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\VendorApplications;
 
+use App\Events\VendorApproved;
 use App\Filament\Admin\Resources\VendorApplications\Pages\CreateVendorApplication;
 use App\Filament\Admin\Resources\VendorApplications\Pages\ListVendorApplications;
 use App\Filament\Admin\Resources\VendorApplications\Pages\ViewVendorApplication;
@@ -94,33 +95,37 @@ class VendorApplicationResource extends Resource
                     ->color('success')
                     ->requiresConfirmation()
                     ->visible(fn($record) => $record->status === 'pending')
-                    ->action(function ($record) {
-                        $record->update([
-                            'status' => 'approved',
-                        ]);
+                     ->action(function ($record) {
+                         $record->update([
+                             'status' => 'approved',
+                         ]);
 
-                        $user = $record->user;
+                         $user = $record->user;
 
-                        // Assign Vendor role.
-                        if (!$user->hasRole('Vendor')) {
-                            $user->assignRole('Vendor');
-                        }
+                          // Assign Vendor role (customer retains the Customer role
+                          // as well, since a vendor can also be a marketplace customer).
+                          if (!$user->hasRole('Vendor')) {
+                              $user->assignRole('Vendor');
+                          }
 
-                        // Remove Customer role.
-                        if ($user->hasRole('Customer')) {
-                            $user->removeRole('Customer');
-                        }
-
-                        // Create Vendor profile.
-                        if (!$user->vendor) {
-                            $user->vendor()->create([
-                                'store_name' => $record->store_name,
-                                'slug' => Str::slug($record->store_name),
-                                'description' => $record->description,
+                         // Create Vendor profile.
+                         if (!$user->vendor) {
+                             $vendor = $user->vendor()->create([
+                                 'store_name' => $record->store_name,
+                                 'slug' => Str::slug($record->store_name),
+                                 'description' => $record->description,
+                                 'is_verified' => true,
+                             ]);
+                         } else {
+                            $vendor = $user->vendor;
+                            $vendor->update([
                                 'is_verified' => true,
+                                'is_active' => true,
                             ]);
-                        }
-                    }),
+                         }
+
+                         VendorApproved::dispatch($vendor, $record);
+                     }),
 
                 Action::make('reject')
                     ->label('Reject')

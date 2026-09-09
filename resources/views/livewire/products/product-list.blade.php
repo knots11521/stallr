@@ -113,6 +113,8 @@
                 <option value="latest">Newest</option>
                 <option value="price_low">Lowest Price</option>
                 <option value="price_high">Highest Price</option>
+                <option value="rating">Top Rated</option>
+                <option value="rating_low">Lowest Rated</option>
             </select>
         </div>
     </div>
@@ -264,17 +266,31 @@
 
 
                         <!-- Description -->
-                        @if ($product->description)
-                            <p
-                                class="text-xs
-                                   text-stone-500 dark:text-stone-400
-                                   line-clamp-2
-                                   leading-relaxed">
-                                {{ $product->description }}
-                            </p>
-                        @endif
+                         @if ($product->description)
+                             <p
+                                 class="text-xs
+                                    text-stone-500 dark:text-stone-400
+                                    line-clamp-2
+                                    leading-relaxed">
+                                 {{ $product->description }}
+                             </p>
+                         @endif
 
-                    </div>
+                         <!-- Rating -->
+                         <div class="flex items-center gap-2">
+                             <div class="flex items-center">
+                                 @for ($i = 1; $i <= 5; $i++)
+                                     <svg class="w-3 h-3 {{ $i <= floor($product->average_rating) ? 'text-amber-400 fill-current' : 'text-stone-300 dark:text-stone-600' }}" fill="currentColor" viewBox="0 0 20 20">
+                                         <path d="M9.049 2.917c.266-.558.945-.76 1.506-.504l.051.02 1.128.414a1 1 0 0 1 .592.592l.414 1.128a1 1 0 0 1-.504 1.297l-.051.018-1.128.414a1 1 0 0 1-1.297-.504l-.414-1.128a1 1 0 0 1 .06-1.297l.051-.018z" />
+                                     </svg>
+                                 @endfor
+                             </div>
+                             <span class="text-xs text-stone-500 dark:text-stone-400">
+                                 ({{ $product->review_count }})
+                             </span>
+                         </div>
+
+                     </div>
 
                 </div>
 
