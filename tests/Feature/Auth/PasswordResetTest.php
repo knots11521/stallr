@@ -5,6 +5,7 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Volt\Volt;
 use Tests\TestCase;
@@ -80,5 +81,16 @@ class PasswordResetTest extends TestCase
 
             return true;
         });
+    }
+
+    public function test_forgot_password_handles_mail_failure_gracefully(): void
+    {
+        Password::shouldReceive('sendResetLink')
+            ->andThrow(new \Exception('Mail service unavailable'));
+
+        Volt::test('pages.auth.forgot-password')
+            ->set('email', 'test@example.com')
+            ->call('sendPasswordResetLink')
+            ->assertSee('Unable to send the password reset link. Please try again later or contact support.');
     }
 }
